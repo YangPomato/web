@@ -5,23 +5,26 @@
         <script>
 <?php
     if(isset($_POST["acct"])){
-        $filename="member.csv";
+        $filename="member.json";
         if(file_exists($filename)){
-            $fp=fopen($filename,"r");
-            while(($member=fgetcsv($fp,1000)!==FALSE)){
+            $all=file_get_contents($filename);
+            $member=json_decode($all,true);
+            foreach($member as $m){
                 if(0==strcmp($member[0],$_POST["acct"]) && password_verify($_POST["pass"],$member[2])){
                     printf("alert('success');");
+                    printf("location.href='regjson.php';");
                     break;
                 }
+        
             }
-                fclose($fp);
+
             }else{
                 printf("alert('no member');");
             }
-        }
+    }
             
-        var_dump($_POST);
         
+      
     
 ?>
         </script>
@@ -32,7 +35,7 @@
             <p>name:<input type="text" name="name"></p>
             <p>password:<input type="password" name="pass1"></p>
             <p>confirm password:<input type="password" name="pass2"></p>
-            <p><input type="submit"></p>    
+            <p><input type="submit" value="login"></p>    
             </form>
         </body>
     </head>

@@ -27,13 +27,9 @@
                     "id"=>$_POST["acct"],
                     "name"=>$_POST["name"],
                     "pw"=>password_hash($_POST["pass1"],PASSWORD_DEFAULT)]);
-                var_dump($member);
-                json_encode($member);
-                var_dump($json);
-
-                var_dump(json_decode($json));
+                $json=json_encode($member);
                 file_put_contents($filename,json_encode($member));
-                //printf("location.href='login.php';");
+                printf("location.href='loginjson.php';");
             
             }
         }
