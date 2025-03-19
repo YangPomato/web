@@ -7,13 +7,13 @@
         if(strcmp($_POST["pass1"],$_POST["pass2"])){
             printf("alert('passdiff');");
         } else{
-            $filename="member.csv"
-            $fp=fopen("member.csv","a")
+            $filename="member.json";
+            $newmember=true;
             if(file_exists($filename)){
-                $fp=fopen($filename,"r")
+                $fp=fopen($filename,"r");
                 while(($member=fgetcsv($fp,1000))!==false){
-                    if(0==strcmp($member[0].$_POST["acct"]){
-                        printf("alert('member');");
+                    if(0==strcmp($member[0],$_POST["acct"])){
+                        printf("alert('member exist');");
                         $newmember=false;
                         break;
                     }
@@ -21,20 +21,19 @@
                 fclose($fp);
             }
             if($newmember){
-
-            }
-            fputcsv($fp,[$_POST["acct"],$_POST["name"],
-                password_hash($_POST["pass1"],PASSWORD_DEFAULT)]);
-            fclose($fp);
-        }
+                $fp=fopen($filename,"a");
+                fputcsv($fp,[$_POST["acct"],$_POST["name"],
+                    password_hash($_POST["pass1"],PASSWORD_DEFAULT)]);
+                fclose($fp);
                 printf("location.href='login.php';");
-
+            }
         }
+    }
             
-        }
+        
         
 
-    }
+    
 ?>
     </head>
     <body>
