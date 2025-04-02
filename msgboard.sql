@@ -1,4 +1,4 @@
-﻿create datobase msgboard;
+﻿create database msgboard;
 use msgboard;
 create table account (
 		idno int primary key auto_increment;
